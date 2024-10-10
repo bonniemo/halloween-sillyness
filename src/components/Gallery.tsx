@@ -1,3 +1,4 @@
+import { useState } from "react";
 import church from "../assets/3.png";
 import circus from "../assets/circus.png";
 import dollattic from "../assets/dollattic.png";
@@ -10,10 +11,18 @@ import maze from "../assets/maze.png";
 import town from "../assets/town.png";
 
 const Gallery = () => {
+  const [isOpaque, setIsOpaque] = useState(false);
   return (
     <section className="grid grid-cols-9 grid-rows-12 gap-2 w-[35rem] relative">
       <div className="col-start-2 col-end-8 row-start-3 row-end-9 relative z-10">
-        <img src={lady} alt="" className="w-full h-full opacity-80" />
+        <img
+          src={lady}
+          alt=""
+          className={`w-full h-full transform transition-all duration-1000 ease-in-out ${
+            isOpaque ? "opacity-0" : "opacity-80"
+          } hover:translate-y-[-10px] hover:scale-110`}
+          onClick={() => setIsOpaque(!isOpaque)}
+        />
       </div>
       <div className="col-start-1 col-span-3 row-start-1 row-end-4">
         <img
