@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import church from "../assets/3.png";
 import circus from "../assets/circus.png";
 import dollattic from "../assets/dollattic.png";
@@ -11,17 +11,27 @@ import maze from "../assets/maze.png";
 import town from "../assets/town.png";
 
 const Gallery = () => {
-  const [isOpaque, setIsOpaque] = useState(false);
+  const [isOpaque, setIsOpaque] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsOpaque(false); // Set to false after 2 seconds to show the image
+    }, 2000); // 2000ms (2 seconds)
+
+    return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
+  }, []);
   return (
     <section className="grid grid-cols-9 grid-rows-12 gap-2 w-[35rem] relative">
       <div className="col-start-2 col-end-8 row-start-3 row-end-9 relative z-10">
         <img
           src={lady}
           alt=""
-          className={`w-full h-full transform transition-all duration-1000 ease-in-out ${
-            isOpaque ? "opacity-0" : "opacity-80"
+          className={`w-full h-full transform transition-all duration-[3000ms] ease-in-out ${
+            isOpaque
+              ? "opacity-0 translate-y-[10px]"
+              : "opacity-80 translate-y-0"
           } hover:translate-y-[-10px] hover:scale-110`}
-          onClick={() => setIsOpaque(!isOpaque)}
+          onClick={() => setIsOpaque(!isOpaque)} // Toggle opacity on click
         />
       </div>
       <div className="col-start-1 col-span-3 row-start-1 row-end-4">
